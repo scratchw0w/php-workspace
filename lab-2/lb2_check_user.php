@@ -27,6 +27,7 @@ if(count($_POST) > 0) {
             $_SESSION['role_id'] = $row["role_id"];
             $_SESSION['auth'] = true;
             if($row['role_id'] == 1) {
+                
                 header('Location: lb2_main_adm.php');    
             } else {
                 header('Location: lb2_main.php');

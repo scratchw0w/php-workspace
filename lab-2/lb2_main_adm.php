@@ -33,6 +33,13 @@ if ($conn -> connect_error) {
     echo "You are admin!";
     ?>
 
+    <form action="lb2_update_user.php" method="post">
+        <input type="text" placeholder="User to update" name="user_id">
+    </form>
+    <form action="lb2_delete_user.php" method="post">
+        <input type="text" placeholder="User to delete" name="user_id">
+    </form>
+
     <h2>All users:</h2>
     <?php 
     
