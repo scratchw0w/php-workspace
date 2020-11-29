@@ -25,17 +25,12 @@ if ($conn -> connect_error) {
 <body>
     <h1>Main-page</h1>
     <?php 
-    if ($_SESSION['auth'] == true) {
-        echo $_SESSION['first_name'] . "  |  " . <<< HTML
-        <a href="lb2_logout.php">Log out</a> 
-        |
-        <a href="lb2_user_page.php">Change my profile</a><br>
-        HTML;
-    } else {
-        echo <<< HTML
-        <a href="lb2_login.php">Log in.</a>
-        HTML;
-    }
+    echo $_SESSION['first_name'] . "  |  " . <<< HTML
+    <a href="lb2_logout.php">Log out</a> 
+    |
+    <a href="lb2_user_page.php">Change my profile</a><br>
+    HTML;
+    echo "You are admin!";
     ?>
 
     <h2>All users:</h2>
@@ -46,7 +41,8 @@ if ($conn -> connect_error) {
     $result = $conn->query($sql);
     
     while($row = $result->fetch_assoc()) {
-        echo '<br><br>ID: ' . $row["id"];
+        $_SESSION['id'] = $row["id"];
+        echo '<a href="lb2_user_page.php">'. '<br><br>ID: ' . $row["id"] . '</a>';
         echo '<br><br>User name: ' . $row["first_name"];
         echo '<br><br>User last name: ' . $row["last_name"];
         echo '<br><br>User role: ' . $row["role_id"];
