@@ -12,6 +12,8 @@ session_start();
 <body>
     <h1>Register Page</h1>
     <form action="lb2_new_user.php" method="POST" enctype="multipart/form-data">
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload">
     <input type="text" placeholder="Enter your name" name="name" >
     <input type="text" placeholder="Enter your surname" name="surname" >
     <select name="role_id">

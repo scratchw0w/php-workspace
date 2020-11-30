@@ -37,22 +37,15 @@ while($row = $result->fetch_assoc()) {
 </head>
 <body>
 
-<form action="lb2_update_ex_user.php" method="POST" enctype="multipart/form-data">
+<form action="lb2_simple_update_ex_user.php" method="POST" enctype="multipart/form-data">
     Select image to upload: 
     <input type="file" name="fileToUpload" id="fileToUpload" value="<?=$currentUserPhoto;?>">
     <input type="hidden" name="userId" value="<?=$currentUser;?>" >
     <input type="text" name="name" value="<?=$currentUserName;?>" >
     <input type="text" placeholder="Enter new surname" name="surname" value="<?=$currentUserLastName;?>" >
-    <select name="role_id">
-    <option value="0">USER</option>
-    <option value="1">ADMIN</option>
-    </select>
     <input type="text" placeholder="Enter new password" name="password" value="<?=$currentUserPass;?>" >
     <input type="submit" value="Update" name="submit">
 </form>
 
-<?php 
-    echo '<a href="' . htmlspecialchars("lb2_delete_user.php?id=" . urlencode($currentUser)) . '">'. "Delete this user" . '</a>';
-?>
 </body>
 </html>

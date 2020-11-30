@@ -50,13 +50,14 @@ if ($uploadOk == 0) {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
         
+        $userId = $_POST["userId"];
         $first_name = $_POST["name"];
         $last_name = $_POST["surname"];
         $role_id = $_POST["role_id"];
         $password = $_POST["password"];
         $img = $target_file;
-        
-        $sql = "INSERT INTO users (first_name, last_name, password, photo, role_id) VALUES ('$first_name', '$last_name', '$password', '$img', '$role_id')";
+
+        $sql = "UPDATE users SET first_name='$first_name', last_name='$last_name', password='$password', photo='$img', role_id='$role_id' WHERE id=$userId";
         $result = $conn->query($sql);
 
         header('Location: lb2_main_adm.php');

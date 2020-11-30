@@ -13,9 +13,9 @@ if ($conn -> connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$user_id = $_POST['user_id'];
+$currentUserId = $_GET['id'];
 
-$sql = "DELETE FROM users WHERE id='$user_id'";
+$sql = "DELETE FROM users WHERE id='$currentUserId'";
 
 $conn->query($sql);
 

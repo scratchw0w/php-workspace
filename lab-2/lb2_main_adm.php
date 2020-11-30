@@ -26,19 +26,10 @@ if ($conn -> connect_error) {
     <h1>Main-page</h1>
     <?php 
     echo $_SESSION['first_name'] . "  |  " . <<< HTML
-    <a href="lb2_logout.php">Log out</a> 
-    |
-    <a href="lb2_user_page.php">Change my profile</a><br>
+    <a href="lb2_logout.php">Log out</a><br>
     HTML;
     echo "You are admin!";
     ?>
-
-    <form action="lb2_update_user.php" method="post">
-        <input type="text" placeholder="User to update" name="user_id">
-    </form>
-    <form action="lb2_delete_user.php" method="post">
-        <input type="text" placeholder="User to delete" name="user_id">
-    </form>
 
     <h2>All users:</h2>
     <?php 
@@ -49,15 +40,20 @@ if ($conn -> connect_error) {
     
     while($row = $result->fetch_assoc()) {
         $_SESSION['id'] = $row["id"];
-        echo '<a href="lb2_user_page.php">'. '<br><br>ID: ' . $row["id"] . '</a>';
+        
+        echo '<a href="' . htmlspecialchars("lb2_user_page.php?id=" . urlencode($row["id"])) . '">'. "ID: " . $row["id"] . '</a>';
         echo '<br><br>User name: ' . $row["first_name"];
         echo '<br><br>User last name: ' . $row["last_name"];
-        echo '<br><br>User role: ' . $row["role_id"];
+        if($row["role_id"] == 1) {
+            echo '<br><br>User role: Admin<br>';
+        } else {
+            echo '<br><br>User role: User<br>';
+        }
     }
 
     
     ?>
 
-    <a href="/lb2_register.php">Register</a>
+    <a href="lb2_register.php">Add new user</a>
 </body>
 </html>

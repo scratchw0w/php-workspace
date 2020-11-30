@@ -21,6 +21,7 @@ if(count($_POST) > 0) {
     
     while($row = $result->fetch_assoc()) {
         if(($row["first_name"] == $_POST["first_name"]) && ($row["password"] == $_POST["password"])) {
+            $_SESSION['user_id'] = $row["id"];
             $_SESSION['first_name'] = $_POST["first_name"];
             $_SESSION['last_name'] = $row["last_name"];
             $_SESSION['photo'] = $row["photo"];

@@ -27,10 +27,10 @@ if ($conn -> connect_error) {
     <?php 
     if ($_SESSION['auth'] == true) {
         echo $_SESSION['first_name'] . "  |  " . <<< HTML
-        <a href="lb2_logout.php">Log out</a> 
-        |
-        <a href="lb2_user_page.php">Change my profile</a><br>
+        <a href="lb2_logout.php">Log out</a><br>
         HTML;
+        $userId = $_SESSION['user_id'];
+        echo '<a href="' . htmlspecialchars("lb2_simple_user_page.php?id=" . urlencode($userId)) . '">'. "Change my Profile" . '</a>';
     } else {
         echo <<< HTML
         <a href="lb2_login.php">Log in.</a>
@@ -49,12 +49,15 @@ if ($conn -> connect_error) {
         echo '<br><br>ID: ' . $row["id"];
         echo '<br><br>User name: ' . $row["first_name"];
         echo '<br><br>User last name: ' . $row["last_name"];
-        echo '<br><br>User role: ' . $row["role_id"];
+        if($row["role_id"] == 1) {
+            echo '<br><br>User role: Admin';
+        } else {
+            echo '<br><br>User role: User';
+        }
     }
 
     
     ?>
 
-    <a href="/lb2_register.php">Register</a>
 </body>
 </html>
