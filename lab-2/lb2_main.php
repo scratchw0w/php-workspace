@@ -20,10 +20,18 @@ if ($conn -> connect_error) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets\styles\main-page-style.css">
     <title>Document</title>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <h1>Main-page</h1>
+    <div class="jumbotron text-center">
+        <h1>User Service</h1>
+    </div>
+    
+    <div class="top-panel">
     <?php 
     if ($_SESSION['auth'] == true) {
         echo $_SESSION['first_name'] . "  |  " . <<< HTML
@@ -37,8 +45,20 @@ if ($conn -> connect_error) {
         HTML;
     }
     ?>
+    </div>
 
     <h2>All users:</h2>
+    <div class="containe">
+    <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
     <?php 
     
     $sql = "SELECT id, first_name, last_name, role_id FROM users";
@@ -46,18 +66,21 @@ if ($conn -> connect_error) {
     $result = $conn->query($sql);
     
     while($row = $result->fetch_assoc()) {
-        echo '<br><br>ID: ' . $row["id"];
-        echo '<br><br>User name: ' . $row["first_name"];
-        echo '<br><br>User last name: ' . $row["last_name"];
+        echo '<tr>';
+        echo '<td>ID: ' . $row["id"] . '</td>';
+        echo '<td>User name: ' . $row["first_name"] . '</td>';
+        echo '<td>User last name: ' . $row["last_name"] . '</td>';
         if($row["role_id"] == 1) {
-            echo '<br><br>User role: Admin';
+            echo '<td>User role: Admin</td>';
         } else {
-            echo '<br><br>User role: User';
+            echo '<td>User role: User</td>';
         }
+        echo '</tr>';
     }
-
-    
     ?>
+    </tbody>
+    </table>
+    </div>
 
 </body>
 </html>
